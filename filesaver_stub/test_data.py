@@ -4,14 +4,14 @@ from dataproducer import ParquetArchiver, FileProducer
 
 
 class StubFileProducer:
+    # odawana implementacja wielkości przychodzących danych i nazw plików
     @staticmethod
     def get_file_size():
-        return 10_000_001
+        return 9_000_000
 
     @staticmethod
     def get_filename():
-        return f"stub-producer-file.parquet"
-
+        return f"stub-file.parquet"
 
 def test_file_producer_without_save():
     archiver = ParquetArchiver()
@@ -26,7 +26,8 @@ def test_file_save():
 
 def test_file_save_with_mock():
     stub_producer = Mock(FileProducer)
-    stub_producer.get_file_size.return_value = 10_000_001
-    archiver = ParquetArchiver(stub_producer)
+    stub_producer.get_file_size.return_value = 9_000_000
+
+    archiver = ParquetArchiver(producer=stub_producer)
     archiver.save_or_cache()
     assert archiver.is_file_saved

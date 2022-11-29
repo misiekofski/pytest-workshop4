@@ -34,5 +34,9 @@ class ParquetArchiver:
     def is_file_saved(self):
         return self._is_file_save
 
+    @property
+    def filename(self):
+        return self._filename
+
     def _merge_with_next_file(self):
         pass
